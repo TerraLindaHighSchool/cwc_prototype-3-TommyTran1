@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private PlayerController playerControllerScript;
     private float startDelay = 2;
     private float repeatRate = 2;
     public GameObject obstaclePrefab;
@@ -12,11 +13,15 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // spawns an object in the scene
     void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+        if(playerControllerScript.gameOver == false)
+        {
+            Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+        }
     }
 }
