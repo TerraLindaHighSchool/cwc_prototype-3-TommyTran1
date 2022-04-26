@@ -16,11 +16,12 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //makes the player move left if the game is no longer over
         if (playerControllerScript.gameOver == false)
         {
             transform.Translate(Vector3.left * Time.deltaTime * speed);
         }
-
+        //removes objects that exceed, on the x value, to the left of the bound
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
         {  
             Destroy(gameObject);

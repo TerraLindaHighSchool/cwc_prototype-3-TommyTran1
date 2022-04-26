@@ -18,20 +18,24 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
-        Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
+        //invokes gravity to multiplied result of gravity mod and physic gravity
+        Physics.gravity *= gravityModifier;
     }
 
     //checks if player is on the ground with collisions
     private void OnCollisionEnter(Collision collision)
     {
+        //checks if the player is on ground 
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
             dirtParticle.Play();
         }
+        //Checks if the player is in contact with an obstacle and plays various sounds and particles
         else if(collision.gameObject.CompareTag("Obstacle"))
         {
             gameOver = true;
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checks for conditions, then makes the player jump
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

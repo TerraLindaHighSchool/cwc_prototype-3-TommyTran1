@@ -19,6 +19,7 @@ public class SpawnManager : MonoBehaviour
     // spawns an object in the scene
     void SpawnObstacle()
     {
+        //spawns an object as long as the bool Game over is false
         if(playerControllerScript.gameOver == false)
         {
             Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
